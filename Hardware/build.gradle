@@ -23,6 +23,11 @@ android {
 
 }
 
+repositories {
+    maven {
+        url = 'https://maven.brott.dev/'
+    }
+}
 dependencies {
     /*
      * Other Modules
@@ -33,4 +38,6 @@ dependencies {
      * External
      */
     implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation "com.acmerobotics.roadrunner:core:1.0.1"
+
 }

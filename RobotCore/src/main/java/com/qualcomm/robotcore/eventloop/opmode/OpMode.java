@@ -198,7 +198,6 @@ public abstract class OpMode extends OpModeInternal {
       internalPostInitLoop();
 
       //noinspection BusyWait
-      Thread.sleep(1);
     }
 
     if (isStarted) {
@@ -214,7 +213,6 @@ public abstract class OpMode extends OpModeInternal {
         internalPostLoop();
 
         //noinspection BusyWait
-        Thread.sleep(1);
       }
     }
 

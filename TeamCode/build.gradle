@@ -10,6 +10,45 @@
 // Custom definitions may go here
 // Include common definitions from above.
 apply from: '../build.common.gradle'
+apply plugin: 'kotlin-android'
+apply plugin: 'dev.frozenmilk.sinister.sloth.load'
+buildscript {
+    repositories {
+        mavenCentral()
+        maven {
+            url "https://repo.dairy.foundation/releases"
+        }
+    }
+    dependencies {
+        classpath "dev.frozenmilk:Load:0.2.2"
+    }
+}
+android {
+    namespace = 'org.firstinspires.ftc.teamcode'
+    kotlinOptions {
+        jvmTarget = '1.8'
+        freeCompilerArgs = ["-Xjvm-default=all"]
+    }
+    packagingOptions {
+        jniLibs.useLegacyPackaging true
+    }
+}
+
+repositories {
+    maven {
+        url "https://repo.dairy.foundation/releases"
+    }
+    maven {
+        url "https://repo.dairy.foundation/snapshots"
+    }
+    maven {
+        url = 'https://maven.brott.dev/'
+    }
+    maven {
+        url = 'https://jitpack.io'
+    }
+}
+
 dependencies {
     /*
      * Other Modules
@@ -21,4 +60,12 @@ dependencies {
     implementation project(':Vision')
 
     implementation 'org.firstinspires.ftc:gameAssets-FreightFrenzy:1.0.0'
+    implementation "dev.frozenmilk.mercurial:Mercurial:1.0.2"
+    implementation "com.acmerobotics.roadrunner:core:1.0.1"
+    implementation("com.acmerobotics.slothboard:dashboard:0.2.2+0.4.16"){
+        exclude group: "org.firstinspires.ftc"
+    }
+    implementation 'com.github.Eeshwar-Krishnan:PhotonFTC:v3.0.1-ALPHA'
+    implementation "dev.frozenmilk.dairy:Core:2.2.2"
+    implementation "dev.frozenmilk.dairy:CachingHardware:1.0.0"
 }
