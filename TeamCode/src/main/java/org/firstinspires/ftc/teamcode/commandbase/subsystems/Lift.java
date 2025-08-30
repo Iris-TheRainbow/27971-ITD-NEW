@@ -63,9 +63,6 @@ public class Lift implements Subsystem {
     private static void setPower(double power){
         liftRight.setPower(power);
         liftLeft.setPower(power);
-        if (!disabledSkippy) {
-            liftLeft2.setPower(power);
-        }
     }
     private static void setMode(DcMotor.RunMode mode){
         liftRight.setMode(mode);

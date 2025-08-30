@@ -1,7 +1,8 @@
 package org.firstinspires.ftc.teamcode.pathing
 
-import com.qualcomm.hardware.sparkfun.SparkFunOTOS
+import com.acmerobotics.roadrunner.Pose2d
 import com.qualcomm.hardware.gobilda.Pinpoint
+import com.qualcomm.hardware.sparkfun.SparkFunOTOS
 import kotlin.math.PI
 
 
@@ -33,17 +34,17 @@ val pinpointXDirection = Pinpoint.EncoderDirection.REVERSED
 val pinpointYDirection = Pinpoint.EncoderDirection.REVERSED
 
 @JvmField
-val axialGain = -.5
+val axialGain = .5
 @JvmField
-val lateralGain = -axialGain
+val lateralGain = axialGain
 @JvmField
-val headingGain = 1
+val headingGain = .4
 @JvmField
 val axialVelGain = 0.15
 @JvmField
 val lateralVelGain = 0.15
 @JvmField
-val headingVelGain = 0.15
+val headingVelGain = .15
 
 @JvmField
 var inPerTick = 1.0
@@ -70,3 +71,16 @@ var maxProfileAccel = 50.0
 var maxAngVel = 2 * PI
 @JvmField
 var maxAngAccel = 1 * PI
+
+@JvmField
+val sampleDepoSpot = Pose2d(-55.5, -55.5, Math.toRadians(225.0))
+
+@JvmField
+val sampleStartPose = Pose2d(-40.0, -64.5, Math.toRadians(180.0))
+
+@JvmField
+val specIntakePose = Pose2d(48.0, -63.2, Math.toRadians(90.0));
+
+@JvmField
+val specStartPose = Pose2d(7.5, -64.5, Math.toRadians(90.0));
+

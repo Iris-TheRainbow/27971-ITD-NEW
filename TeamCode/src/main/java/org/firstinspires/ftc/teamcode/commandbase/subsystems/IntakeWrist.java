@@ -51,7 +51,7 @@ public class IntakeWrist implements Subsystem {
         return new Sequential(new Lambda("wrist intake")
                 .addRequirements(INSTANCE)
                 .setInit(() -> setWristPosition(.35)),
-                new Wait(.2));
+                new Wait(.1));
     }
     @NonNull
     public static Command wristVision() {

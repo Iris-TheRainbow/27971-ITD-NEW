@@ -1,5 +1,7 @@
 package org.firstinspires.ftc.teamcode.opmodes;
 
+import static org.firstinspires.ftc.teamcode.commandbase.CommandGroups.depositSpec;
+import static org.firstinspires.ftc.teamcode.commandbase.CommandGroups.instakeSpec;
 import static org.firstinspires.ftc.teamcode.commandbase.CommandGroups.liftHigh;
 import static org.firstinspires.ftc.teamcode.commandbase.CommandGroups.liftMedium;
 import static org.firstinspires.ftc.teamcode.commandbase.CommandGroups.prepDepo;
@@ -17,9 +19,9 @@ import org.firstinspires.ftc.teamcode.commandbase.subsystems.Extendo;
 import org.firstinspires.ftc.teamcode.commandbase.subsystems.IntakeClaw;
 import org.firstinspires.ftc.teamcode.commandbase.subsystems.IntakeRotate;
 import org.firstinspires.ftc.teamcode.commandbase.subsystems.IntakeWrist;
-import org.firstinspires.ftc.teamcode.commandbase.subsystems.Drive;
 import org.firstinspires.ftc.teamcode.commandbase.subsystems.Lift;
 import org.firstinspires.ftc.teamcode.commandbase.subsystems.DepositWrist;
+import org.firstinspires.ftc.teamcode.commandbase.subsystems.Wavedash;
 import org.firstinspires.ftc.teamcode.util.features.BulkRead;
 import org.firstinspires.ftc.teamcode.util.features.LoopTimes;
 import org.firstinspires.ftc.teamcode.util.features.Telem;
@@ -43,25 +45,21 @@ import dev.frozenmilk.mercurial.commands.util.Wait;
 @IntakeRotate.Attach
 @Lift.Attach
 @Extendo.Attach
-@Drive.Attach
+@Wavedash.Attach
 @BulkRead.Attach
 @LoopTimes.Attach
 public class Tele extends OpMode {
     @Override
     public void init() {
         Lift.liftOffset = 0;
-        Mercurial.gamepad2().y().onTrue(new Advancing(IntakeWrist.wristTransfer(), DepositWrist.wristTransfer(), DepositArm.armTransfer(), DepositClaw.closeClaw(),new Wait(.3), IntakeClaw.openClaw()));
         //lift to high basket
-        Mercurial.gamepad1().y().onTrue(new Sequential(Drive.nerfDrive(1), retract(), transfer(), liftHigh()));
+        Mercurial.gamepad1().y().onTrue(new Sequential(Wavedash.nerfDrive(1), retract(), transfer(), liftHigh()));
         //lift to high bar
-        Mercurial.gamepad1().x().onTrue(new Sequential(Drive.nerfDrive(1), new Parallel(DepositClaw.openClaw(), IntakeWrist.wristIntermediate(), new Wait(.025).then(IntakeRotate.center())), new Wait(.1), retract(), transfer(), liftMedium()));
         //retract extendo and transfer
-        Mercurial.gamepad1().a().onTrue(new Sequential(Drive.nerfDrive(1), retract(), transfer(), prepDepo(), DepositWrist.wristSepc()));
+        Mercurial.gamepad1().a().onTrue(new Sequential(Wavedash.nerfDrive(1), retract(), transfer(), prepDepo(), DepositWrist.wristSepc()));
         //extend
-        Mercurial.gamepad1().b().onTrue(new Sequential(Drive.nerfDrive(.5), CommandGroups.intake()));
-        //toggle for wrist
-        Mercurial.gamepad1().leftBumper().onTrue(new Advancing(IntakeWrist.wristTransfer(), IntakeWrist.wristIntake()));
-        //toggle for claw
+        Mercurial.gamepad1().b().onTrue(new Sequential(Wavedash.nerfDrive(.5), CommandGroups.intake()));
+                                                                                                                                      //toggle for claw
         //Mercurial.gamepad1().rightBumper().onTrue(new Parallel(IntakeClaw.toggleClaw(), DepositClaw.toggleClaw()));
         Mercurial.gamepad1().rightBumper().onTrue(new IfElse(() -> Lift.getTarget() > 300, proxiedCommand(new Sequential(DepositClaw.openClaw(), new Wait(.05), new Parallel(DepositArm.armExtend(), new Sequential(new Wait(.1), retract())))), proxiedCommand(new Parallel(IntakeClaw.toggleClaw(), DepositClaw.toggleClaw()).then(new Wait(.1)).then(new Parallel(DepositArm.armTransfer(), DepositWrist.wristTransfer())))));
         //hang extend
@@ -73,8 +71,7 @@ public class Tele extends OpMode {
         Mercurial.gamepad1().leftTrigger().conditionalBindState().greaterThan(.2).bind().onTrue(IntakeRotate.next());
         Mercurial.gamepad1().rightTrigger().conditionalBindState().greaterThan(.2).bind().onTrue(IntakeRotate.previous());
         Mercurial.gamepad1().rightStickButton().and(Mercurial.gamepad1().dpadDown()).onTrue(new Parallel(Lift.goTo(1000), DepositArm.armTransfer(), Lift.disableSkippy()));
-
-        //Mercurial.gamepad1().back().whileTrue(proxiedCommand(Lift.retract()));
+        Mercurial.gamepad1().leftBumper().onTrue(new IfElse(() -> Extendo.getTarget() > 100, Extendo.goTo(0).with(IntakeWrist.wristSpec()), new Parallel(Extendo.goTo(475), IntakeWrist.wristSpec())));
         gamepad1.setLedColor(255, 0, 0, 999999999);
     }
 

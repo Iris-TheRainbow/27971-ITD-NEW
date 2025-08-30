@@ -48,36 +48,38 @@ public class DepositWrist implements Subsystem {
     public static Command wristDeposit() {
         return new Sequential(new Lambda("wrist deposit")
                 .addRequirements(INSTANCE)
-                .setInit(() -> setPosition(.65)),
+                .setInit(() -> setPosition(.43)),
                 new Wait(.075));
     }
     @NonNull
     public static Command wristWait() {
         return new Sequential(new Lambda("wrist wait")
                 .addRequirements(INSTANCE)
-                .setInit(() -> setPosition(.33)),
+                .setInit(() -> setPosition(.24)),
                 new Wait(.075));
     }
     @NonNull
     public static Command wristTransfer() {
         return new Sequential(new Lambda("wrist transfer")
                 .addRequirements(INSTANCE)
-                .setInit(() -> setPosition(.33)),
+                .setInit(() -> setPosition(.24)),
                 new Wait(.075));
     }
     @NonNull
     public static Command wristSepc() {
         return new Sequential(new Lambda("wrist spec")
                 .addRequirements(INSTANCE)
-                .setInit(() -> setPosition(.52)),
+                .setInit(() -> setPosition(.43)),
                 new Wait(.075));
     }
-    public enum States {
-        SPEC,
-        TRANSFER,
-        WAIT,
-        DEPOSIT
+
+    @NonNull
+    public static Command wristDepo(){
+        return new Lambda("wrist sample depo")
+                .setRequirements(INSTANCE)
+                .setInit(() -> setPosition(.5));
     }
+
     @Retention(RetentionPolicy.RUNTIME)
     @Target(ElementType.TYPE)
     @MustBeDocumented

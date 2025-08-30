@@ -65,6 +65,16 @@ dependencies {
     implementation("com.acmerobotics.slothboard:dashboard:0.2.2+0.4.16"){
         exclude group: "org.firstinspires.ftc"
     }
+    implementation ("com.github.jdhs-ftc:road-runner-ftc-otos:a425f97d46"){
+        exclude group: "com.acmerobotics.dashboard"
+        exclude group: "org.firstinspires.ftc"
+
+    }
+    implementation ("com.acmerobotics.roadrunner:actions:1.0.0"){
+        exclude group: "com.acmerobotics.dashboard"
+        exclude group: "org.firstinspires.ftc"
+
+    }
     implementation 'com.github.Eeshwar-Krishnan:PhotonFTC:v3.0.1-ALPHA'
     implementation "dev.frozenmilk.dairy:Core:2.2.2"
     implementation "dev.frozenmilk.dairy:CachingHardware:1.0.0"

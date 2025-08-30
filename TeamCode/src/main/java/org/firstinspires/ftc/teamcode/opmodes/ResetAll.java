@@ -6,12 +6,12 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import org.firstinspires.ftc.teamcode.commandbase.subsystems.DepositArm;
 import org.firstinspires.ftc.teamcode.commandbase.subsystems.DepositClaw;
 import org.firstinspires.ftc.teamcode.commandbase.subsystems.DepositWrist;
-import org.firstinspires.ftc.teamcode.commandbase.subsystems.Drive;
 import org.firstinspires.ftc.teamcode.commandbase.subsystems.Extendo;
 import org.firstinspires.ftc.teamcode.commandbase.subsystems.IntakeClaw;
 import org.firstinspires.ftc.teamcode.commandbase.subsystems.IntakeRotate;
 import org.firstinspires.ftc.teamcode.commandbase.subsystems.IntakeWrist;
 import org.firstinspires.ftc.teamcode.commandbase.subsystems.Lift;
+import org.firstinspires.ftc.teamcode.commandbase.subsystems.Wavedash;
 import org.firstinspires.ftc.teamcode.util.features.BulkRead;
 import org.firstinspires.ftc.teamcode.util.features.LoopTimes;
 import org.firstinspires.ftc.teamcode.util.features.Telem;
@@ -28,7 +28,7 @@ import dev.frozenmilk.mercurial.Mercurial;
 @IntakeRotate.Attach
 @Lift.Attach
 @Extendo.Attach
-@Drive.Attach
+@Wavedash.Attach
 @BulkRead.Attach
 @LoopTimes.Attach
 @Telem.Attach
